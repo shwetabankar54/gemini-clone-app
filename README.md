@@ -1,15 +1,22 @@
 # Gemini Clone App
 
-A React-based clone of Google's Gemini AI interface.
+A React-based clone of Google's Gemini AI interface with real-time AI responses powered by the Google Gemini API.
 
-## 🚧 Work in Progress
+## ✨ Features
 
-This project is currently under active development. More features and improvements are coming soon!
+- Interactive chat interface with Google Gemini AI
+- Real-time AI responses with typing animation
+- Suggestion cards for quick prompts
+- Clean and modern UI matching Google's Gemini design
+- Sidebar navigation with chat history
+- Error handling for API failures
+- Responsive design
 
 ## 🛠️ Tech Stack
 
-- **React** - UI library
+- **React 19** - UI library
 - **Vite** - Build tool and development server
+- **Google Generative AI SDK** - Gemini API integration
 - **CSS** - Styling
 
 ## 📦 Installation
@@ -17,7 +24,7 @@ This project is currently under active development. More features and improvemen
 1. Clone the repository:
 ```bash
 git clone https://github.com/shwetabankar54/gemini-clone-app.git
-cd gemini-clone-app
+cd Gemini_Clone_App
 ```
 
 2. Install dependencies:
@@ -25,12 +32,20 @@ cd gemini-clone-app
 npm install
 ```
 
-3. Run the development server:
+3. Set up your Google Gemini API key:
+   - Get your API key from [Google AI Studio](https://aistudio.google.com/apikey)
+   - Create a `.env` file in the root directory
+   - Add your API key:
+   ```
+   VITE_GOOGLE_API_KEY=your_api_key_here
+   ```
+
+4. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Open your browser and navigate to the local development URL (typically `http://localhost:5173`)
+5. Open your browser and navigate to `http://localhost:5173`
 
 ## 📁 Project Structure
 
@@ -38,26 +53,40 @@ npm run dev
 Gemini_Clone_App/
 ├── src/
 │   ├── components/
-│   │   ├── Main.jsx
+│   │   ├── Main.jsx          # Main chat interface
 │   │   ├── Main.css
-│   │   ├── Sidebar.jsx
+│   │   ├── Sidebar.jsx       # Navigation sidebar
 │   │   └── Sidebar.css
+│   ├── config/
+│   │   └── gemini.js         # Gemini API configuration
+│   ├── context/
+│   │   └── Context.jsx       # Global state management
 │   ├── assets/
+│   │   └── assets.js         # App icons and images
 │   ├── App.jsx
 │   ├── App.css
 │   ├── index.css
 │   └── main.jsx
+├── .env                      # Environment variables (API key)
 ├── index.html
 ├── package.json
 └── vite.config.js
 ```
 
-## 🎯 Features
+## 🔧 Configuration
 
-- Clean and modern UI
-- Sidebar navigation with collapsible menu
-- Main chat interface
-- Responsive design
+The app uses the **Gemini 2.5 Flash** model for fast and efficient responses. You can modify the model in `src/config/gemini.js`:
+
+```javascript
+const model = genAI.getGenerativeModel({
+    model: "gemini-2.5-flash",
+});
+```
+
+Available models:
+- `gemini-2.5-flash` - Fast responses (recommended)
+- `gemini-2.5-pro` - More capable, slower responses
+- `gemini-3-flash-preview` - Latest preview version
 
 ## 📝 Available Scripts
 
