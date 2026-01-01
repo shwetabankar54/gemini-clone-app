@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import './Sidebar.css';
-import {assets} from "../assets/assets";
+import { sidebarIcons } from "../assets/Sidebar-Icons";
 import { Context } from '../context/Context';
 
 export default function Sidebar() {
@@ -16,9 +16,9 @@ export default function Sidebar() {
     return (
         <div className="sidebar">
             <div className="top">
-                <img onClick={()=>setExtended(prev=>!prev)} className="menu" src={assets.menu_icon} alt="" />
+                <img onClick={()=>setExtended(prev=>!prev)} className="menu" src={sidebarIcons.menu_icon} alt="" />
                 <div onClick={() => newChat()} className="new-chat">
-                    <img src={assets.plus_icon} alt="" />
+                    <img src={sidebarIcons.plus_icon} alt="" />
                     {extended?<p>New Chat</p>:null}
                 </div>
                 {extended
@@ -27,7 +27,7 @@ export default function Sidebar() {
                         {prevPrompts.map((item, index) => {
                             return (
                                 <div key={index} onClick={() => loadPrompt(item)} className="recent-entry">
-                                    <img src={assets.message_icon} alt="" />
+                                    <img src={sidebarIcons.message_icon} alt="" />
                                     <p>{item.slice(0, 18)} ...</p>
                                 </div>
                             )
@@ -37,18 +37,18 @@ export default function Sidebar() {
                 }
             </div>
             <div className="bottom">
-                <div className="bottom-item recent-entry">
-                    <img src={assets.question_icon} alt="" />
+                <div className="bottom-item">
+                    <img src={sidebarIcons.question_icon} alt="" />
                     {extended?<p>Help</p>:null}
                 </div>
 
-                <div className="bottom-item recent-entry">
-                    <img src={assets.history_icon} alt="" />
+                <div className="bottom-item">
+                    <img src={sidebarIcons.history_icon} alt="" />
                     {extended?<p>Activity</p>:null}
                 </div>
 
-                <div className="bottom-item recent-entry">
-                    <img src={assets.setting_icon} alt="" />
+                <div className="bottom-item">
+                    <img src={sidebarIcons.setting_icon} alt="" />
                     {extended?<p>Settings</p>:null}
                 </div>
             </div>

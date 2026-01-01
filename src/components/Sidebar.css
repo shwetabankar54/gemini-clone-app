@@ -1,35 +1,112 @@
+/* ===========================
+   BASE STYLES (Both States)
+   =========================== */
+
 .sidebar{
     min-height: 100vh;
     display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     background-color: #f0f4f9;
-    padding: 25px 15px;
+    padding: 12px 8px;
 }
 
+.sidebar .top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Common image styling */
 .sidebar img{
-    width: 20px;
+    margin: 0;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
 }
 
+
+/* ===========================
+   COLLAPSED STATE STYLES
+   =========================== */
+
+/* Menu icon (hamburger) */
 .sidebar .menu{
     display: block;
-    margin-left: 10px;
     cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+    box-sizing: content-box;
+    width: 48px;
+    height: 48px;
+    transition: background-color 0.2s ease;
 }
 
+.sidebar .menu:hover{
+    background-color: #e2e6eb;
+}
+
+/* New Chat button (Plus icon) */
 .sidebar .new-chat{
     display: inline-flex;
-    margin-top: 50px;
+    margin-top: 20px;
     align-items: center;
     gap: 10px;
-    padding: 10px 15px;
-    background-color: #e6eaf1;
-    border-radius: 50px;
+    padding: 5px;
+    border-radius: 10px;
     font-size: 14px;
     color: grey;
     cursor: pointer;
+    box-sizing: content-box;
 }
 
+.sidebar .new-chat img{
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+    transition: filter 0.2s ease;
+}
+
+.sidebar .new-chat:hover img{
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15)) brightness(0.95);
+}
+
+/* Bottom items (Help, Activity, Settings) */
+.sidebar .bottom-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-sizing: content-box;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar .bottom-item img{
+    display: block;
+    width: 48px;
+    height: 48px;
+}
+
+.sidebar .bottom-item:hover{
+    background-color: #e2e6eb;
+}
+
+
+/* ===========================
+   EXTENDED STATE STYLES
+   =========================== */
+
+/* Recent prompts section */
 .sidebar .recent{
     display: flex;
     flex-direction: column;
@@ -45,27 +122,18 @@
     align-items: start;
     gap: 10px;
     padding: 10px;
-    padding-right: 40px;
     color: #282828;
-    border-radius: 50px;
+    border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .sidebar .recent-entry:hover{
     background-color: #e2e6eb;
 }
 
-.sidebar .bottom{
-    display: flex;
-    flex-direction: column;
+/* Text labels in extended state */
+.sidebar .bottom-item p{
+    color: #282828;
+    font-size: 14px;
 }
-
-.sidebar .bottom-item{
-    padding: 10px;
-    cursor: pointer;
-}
-
-
-
-
-
