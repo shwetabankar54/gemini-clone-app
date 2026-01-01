@@ -37,17 +37,17 @@ export default function Sidebar() {
                 }
             </div>
             <div className="bottom">
-                <div className="bottom-item recent-entry">
+                <div className="bottom-item">
                     <img src={sidebarIcons.question_icon} alt="" />
                     {extended?<p>Help</p>:null}
                 </div>
 
-                <div className="bottom-item recent-entry">
+                <div className="bottom-item">
                     <img src={sidebarIcons.history_icon} alt="" />
                     {extended?<p>Activity</p>:null}
                 </div>
 
-                <div className="bottom-item recent-entry">
+                <div className="bottom-item">
                     <img src={sidebarIcons.setting_icon} alt="" />
                     {extended?<p>Settings</p>:null}
                 </div>
