@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import './Main.css';
-import {assets} from "../assets/assets";
+import { assets } from "../assets/assets";
+import { sidebarIcons } from "../assets/Sidebar-Icons";
 import { Context } from '../context/Context';
 
 export default function Main() {
@@ -30,7 +31,7 @@ export default function Main() {
                         </div>
                         <div className="card" onClick={() => onSent("Perform SWAT analysis.")}>
                             <p>Perform SWAT analysis.</p>
-                            <img src={assets.message_icon} alt="" />
+                            <img src={sidebarIcons.message_icon} alt="" />
                         </div>
                         <div className="card" onClick={() => onSent("Improve the readability of the following code.")}>
                             <p>Improve the readability of the following code.</p>
