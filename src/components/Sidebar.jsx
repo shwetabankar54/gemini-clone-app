@@ -14,7 +14,7 @@ export default function Sidebar() {
     }
 
     return (
-        <div className="sidebar">
+        <div className={`sidebar ${extended ? "extended" : ""}`}>
             <div className="top">
                 <img onClick={()=>setExtended(prev=>!prev)} className="menu" src={sidebarIcons.menu_icon} alt="" />
                 <div onClick={() => newChat()} className="new-chat">

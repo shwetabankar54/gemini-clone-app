@@ -7,21 +7,27 @@
     display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     background-color: #f0f4f9;
     padding: 12px 8px;
+    width: 72px;
+    transition: width 0.25s ease;
+}
+
+.sidebar.extended{
+    width: 240px;
 }
 
 .sidebar .top{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .sidebar .bottom{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
 }
 
@@ -56,16 +62,18 @@
 
 /* New Chat button (Plus icon) */
 .sidebar .new-chat{
-    display: inline-flex;
+    display: flex;
     margin-top: 20px;
     align-items: center;
+    justify-content: flex-start;
     gap: 10px;
     padding: 5px;
     border-radius: 10px;
     font-size: 14px;
     color: grey;
     cursor: pointer;
-    box-sizing: content-box;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .sidebar .new-chat img{
@@ -83,12 +91,14 @@
 .sidebar .bottom-item{
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 10px;
     padding: 5px;
     cursor: pointer;
     border-radius: 10px;
-    box-sizing: content-box;
+    box-sizing: border-box;
     transition: background-color 0.2s ease;
+    width: 100%;
 }
 
 .sidebar .bottom-item img{
@@ -119,13 +129,31 @@
 
 .sidebar .recent-entry{
     display: flex;
-    align-items: start;
+    align-items: center;
     gap: 10px;
     padding: 10px;
     color: #282828;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+}
+
+.sidebar.extended .new-chat,
+.sidebar.extended .bottom-item,
+.sidebar.extended .recent,
+.sidebar.extended .recent-entry{
+    width: 100%;
+}
+
+.sidebar.extended .new-chat,
+.sidebar.extended .bottom-item,
+.sidebar.extended .recent-entry{
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.sidebar.extended .recent-title{
+    padding-left: 10px;
 }
 
 .sidebar .recent-entry:hover{
@@ -136,4 +164,24 @@
 .sidebar .bottom-item p{
     color: #282828;
     font-size: 14px;
+}
+
+.sidebar.extended .new-chat p,
+.sidebar.extended .bottom-item p,
+.sidebar.extended .recent-title,
+.sidebar.extended .recent-entry p{
+    opacity: 0;
+    transform: translateX(-4px);
+    animation: sidebar-text-in 0.1s ease 0.15s forwards;
+}
+
+@keyframes sidebar-text-in{
+    from{
+        opacity: 0;
+        transform: translateX(-4px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
