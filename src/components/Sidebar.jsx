@@ -1,12 +1,11 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import './Sidebar.css';
-import {assets} from "../assets/assets";
+import { sidebarIcons } from "../assets/Sidebar-Icons";
 import { Context } from '../context/Context';
 
 export default function Sidebar() {
-
-    const [extended,setExtended] = useState(false);
-    const {onSent, prevPrompts, setRecentPrompt, newChat} = useContext(Context);
+    const [extended, setExtended] = useState(false);
+    const { onSent, prevPrompts, setRecentPrompt, newChat } = useContext(Context);
 
     const loadPrompt = async (prompt) => {
         setRecentPrompt(prompt);
@@ -14,20 +13,25 @@ export default function Sidebar() {
     }
 
     return (
-        <div className="sidebar">
+        <div className={`sidebar ${extended ? "extended" : ""}`}>
             <div className="top">
-                <img onClick={()=>setExtended(prev=>!prev)} className="menu" src={assets.menu_icon} alt="" />
+                <div onClick={() => setExtended(prev => !prev)} className="menu">
+                    <img src={sidebarIcons.menu_icon} alt="" />
+                </div>
                 <div onClick={() => newChat()} className="new-chat">
-                    <img src={assets.plus_icon} alt="" />
-                    {extended?<p>New Chat</p>:null}
+                    <img src={sidebarIcons.plus_icon} alt="" />
+                    {extended ? <p>New chat</p> : null}
                 </div>
                 {extended
                     ? <div className="recent">
-                        <p className="recent-title">Recent</p>
                         {prevPrompts.map((item, index) => {
                             return (
-                                <div key={index} onClick={() => loadPrompt(item)} className="recent-entry">
-                                    <img src={assets.message_icon} alt="" />
+                                <div
+                                    key={index}
+                                    onClick={() => loadPrompt(item)}
+                                    className="recent-entry"
+                                >
+                                    <img src={sidebarIcons.message_icon} alt="" />
                                     <p>{item.slice(0, 18)} ...</p>
                                 </div>
                             )
@@ -35,22 +39,6 @@ export default function Sidebar() {
                     </div>
                     : null
                 }
-            </div>
-            <div className="bottom">
-                <div className="bottom-item recent-entry">
-                    <img src={assets.question_icon} alt="" />
-                    {extended?<p>Help</p>:null}
-                </div>
-
-                <div className="bottom-item recent-entry">
-                    <img src={assets.history_icon} alt="" />
-                    {extended?<p>Activity</p>:null}
-                </div>
-
-                <div className="bottom-item recent-entry">
-                    <img src={assets.setting_icon} alt="" />
-                    {extended?<p>Settings</p>:null}
-                </div>
             </div>
         </div>
     )
