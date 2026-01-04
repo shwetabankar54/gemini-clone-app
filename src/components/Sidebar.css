@@ -2,47 +2,52 @@
    BASE STYLES (Both States)
    =========================== */
 
-.sidebar{
-    min-height: 100vh;
-    display: inline-flex;
+.sidebar {
+    height: calc(100vh - 40px);
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f0f4f9;
+    justify-content: flex-start;
+    align-items: stretch;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 12px 8px;
+    width: 72px;
+    margin: 20px;
+    border-radius: 20px;
+    transition: width 0.25s ease;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar .top{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.sidebar.extended {
+    width: 280px;
 }
 
-.sidebar .bottom{
+.sidebar .top {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    align-items: flex-start;
 }
 
 /* Common image styling */
-.sidebar img{
+.sidebar img {
     margin: 0;
     width: 48px;
     height: 48px;
     object-fit: contain;
 }
 
-
 /* ===========================
    COLLAPSED STATE STYLES
    =========================== */
 
 /* Menu icon (hamburger) */
-.sidebar .menu{
+.sidebar .menu {
     display: block;
     cursor: pointer;
-    padding: 5px;
+    padding: 4px;
     border-radius: 10px;
     box-sizing: content-box;
     width: 48px;
@@ -50,76 +55,52 @@
     transition: background-color 0.2s ease;
 }
 
-.sidebar .menu:hover{
-    background-color: #e2e6eb;
+.sidebar .menu:hover {
+    background-color: rgba(226, 230, 235, 0.5);
 }
 
 /* New Chat button (Plus icon) */
-.sidebar .new-chat{
-    display: inline-flex;
+.sidebar .new-chat {
+    display: flex;
     margin-top: 20px;
     align-items: center;
-    gap: 10px;
-    padding: 5px;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 4px;
     border-radius: 10px;
     font-size: 14px;
     color: grey;
     cursor: pointer;
-    box-sizing: content-box;
+    box-sizing: border-box;
+    width: 100%;
+    transition: background-color 0.2s ease;
 }
 
-.sidebar .new-chat img{
+.sidebar .new-chat:hover {
+    background-color: rgba(226, 230, 235, 0.5);
+}
+
+.sidebar .new-chat img {
     width: 48px;
     height: 48px;
     filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
     transition: filter 0.2s ease;
 }
 
-.sidebar .new-chat:hover img{
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15)) brightness(0.95);
-}
-
-/* Bottom items (Help, Activity, Settings) */
-.sidebar .bottom-item{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 10px;
-    box-sizing: content-box;
-    transition: background-color 0.2s ease;
-}
-
-.sidebar .bottom-item img{
-    display: block;
-    width: 48px;
-    height: 48px;
-}
-
-.sidebar .bottom-item:hover{
-    background-color: #e2e6eb;
-}
-
-
 /* ===========================
    EXTENDED STATE STYLES
    =========================== */
 
 /* Recent prompts section */
-.sidebar .recent{
+.sidebar .recent {
     display: flex;
     flex-direction: column;
-}
-
-.sidebar .recent-title{
     margin-top: 30px;
-    margin-bottom: 20px;
 }
 
-.sidebar .recent-entry{
+.sidebar .recent-entry {
     display: flex;
-    align-items: start;
+    align-items: center;
     gap: 10px;
     padding: 10px;
     color: #282828;
@@ -128,12 +109,37 @@
     transition: background-color 0.2s ease;
 }
 
-.sidebar .recent-entry:hover{
-    background-color: #e2e6eb;
+.sidebar.extended .new-chat,
+.sidebar.extended .recent,
+.sidebar.extended .recent-entry {
+    width: 100%;
+}
+
+.sidebar.extended .new-chat,
+.sidebar.extended .recent-entry {
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.sidebar .recent-entry:hover {
+    background-color: rgba(226, 230, 235, 0.5);
 }
 
 /* Text labels in extended state */
-.sidebar .bottom-item p{
-    color: #282828;
-    font-size: 14px;
+.sidebar.extended .new-chat p,
+.sidebar.extended .recent-entry p {
+    opacity: 0;
+    transform: translateX(-4px);
+    animation: sidebar-text-in 0.1s ease 0.15s forwards;
+}
+
+@keyframes sidebar-text-in {
+    from {
+        opacity: 0;
+        transform: translateX(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
