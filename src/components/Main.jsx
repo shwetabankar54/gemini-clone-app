@@ -11,31 +11,27 @@ export default function Main() {
         <div className="main">
             <div className="nav">
                 <p>Gemini</p>
-                <img src={assets.user_icon} alt="" />
             </div>
             <div className="main-container">
                 {!showResult
                 ? <>
                     <div className="greet">
-                        <p><span>Hello, Shweta!</span></p>
+                        <p><span>Hello!</span></p>
                         <p>How can I help you today?</p>
                     </div>
-                    <div className="cards">
-                        <div className="card" onClick={() => onSent("Suggest beautiful places to see on an upcoming road trip.")}>
-                            <p>Suggest beautiful places to see on an upcoming road trip.</p>
-                            <img src={assets.compass_icon} alt="" />
-                        </div>
-                        <div className="card" onClick={() => onSent("Create a diet plan.")}>
-                            <p>Create a diet plan.</p>
-                            <img src={assets.bulb_icon} alt="" />
-                        </div>
-                        <div className="card" onClick={() => onSent("Perform SWAT analysis.")}>
-                            <p>Perform SWAT analysis.</p>
-                            <img src={sidebarIcons.message_icon} alt="" />
-                        </div>
-                        <div className="card" onClick={() => onSent("Improve the readability of the following code.")}>
-                            <p>Improve the readability of the following code.</p>
-                            <img src={assets.code_icon} alt="" />
+                    <div className="main-bottom">
+                        <div className="search-box">
+                            <input
+                                onChange={(e) => setInput(e.target.value)}
+                                value={input}
+                                type="text"
+                                placeholder="Enter a prompt here"
+                            />
+                            <div>
+                                <img src={assets.gallery_icon} alt="" />
+                                <img src={assets.mic_icon} alt="" />
+                                {input ? <img onClick={() => onSent()} src={assets.send_icon} alt="" /> : null}
+                            </div>
                         </div>
                     </div>
                 </>
@@ -57,25 +53,6 @@ export default function Main() {
                     </div>
                 </div>
                 }
-
-                <div className="main-bottom">
-                    <div className="search-box">
-                        <input
-                            onChange={(e) => setInput(e.target.value)}
-                            value={input}
-                            type="text"
-                            placeholder="Enter a prompt here"
-                        />
-                        <div>
-                            <img src={assets.gallery_icon} alt="" />
-                            <img src={assets.mic_icon} alt="" />
-                            {input ? <img onClick={() => onSent()} src={assets.send_icon} alt="" /> : null}
-                        </div>
-                    </div>
-                    <p className="bottom-info">
-                        Gemini may display inaccurate info, including about people, so double-check its responses. Your privacy and Gemini Apps.
-                    </p>
-                </div>
             </div>
         </div>
     )

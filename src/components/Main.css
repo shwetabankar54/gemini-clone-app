@@ -3,6 +3,7 @@
     min-width: 100vh;
     padding-bottom: 15vh;
     position: relative;
+    z-index: 10;
 }
 
 .main .nav{
@@ -22,6 +23,7 @@
 .main-container{
     max-width: 900px;
     margin: auto;
+    position: relative;
 }
 
 .main-container .greet{
@@ -30,6 +32,8 @@
     color: #c4c7c5;
     font-weight: 500;
     padding: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .main-container .greet span{
@@ -43,6 +47,8 @@
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 15px;
     padding: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .main .card{
@@ -74,12 +80,12 @@
 }
 
 .main-bottom{
-    position: absolute;
-    bottom: 0;
     width: 100%;
     max-width: 900px;
     margin: auto;
     padding: 0px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .search-box{
@@ -88,8 +94,11 @@
     justify-content: space-between;
     gap: 20px;
     padding: 10px 20px;
-    background-color: #f0f4f9;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .search-box img{
@@ -123,6 +132,8 @@
     padding: 0px 5%;
     max-height: 70vh;
     overflow-y: scroll;
+    position: relative;
+    z-index: 1;
 }
 
 .result::-webkit-scrollbar{
