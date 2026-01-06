@@ -20,6 +20,9 @@ const ContextProvider = (props) => {
     const newChat = () => {
         setLoading(false);
         setShowResult(false);
+        setResultData("");
+        setInput("");
+        setRecentPrompt("");
     };
 
     const onSent = async (prompt) => {
@@ -55,7 +58,18 @@ const ContextProvider = (props) => {
             }
         } catch (error) {
             console.error("Error getting response:", error);
-            setResultData("Sorry, I encountered an error. Please check your API key and try again.");
+
+            let errorMessage = "Sorry, I encountered an error. ";
+
+            if (error.message.includes("API key") || !import.meta.env.VITE_GOOGLE_API_KEY) {
+                errorMessage = "❌ API Key Error: Please check that your VITE_GOOGLE_API_KEY is set correctly in the .env file. Get your API key from https://aistudio.google.com/apikey";
+            } else if (error.message.includes("network") || error.message.includes("fetch")) {
+                errorMessage += "Please check your internet connection and try again.";
+            } else {
+                errorMessage += "Please try again later. Error: " + error.message;
+            }
+
+            setResultData(errorMessage);
         } finally {
             setLoading(false);
             setInput("");

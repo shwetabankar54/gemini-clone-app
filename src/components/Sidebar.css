@@ -3,7 +3,7 @@
    =========================== */
 
 .sidebar {
-    height: calc(100vh - 40px);
+    height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -13,7 +13,7 @@
     -webkit-backdrop-filter: blur(20px);
     padding: 12px 8px;
     width: 72px;
-    margin: 20px;
+    margin: 20px 20px 30px 20px;
     border-radius: 20px;
     transition: width 0.25s ease;
     position: relative;
@@ -45,6 +45,7 @@
 
 /* Menu icon (hamburger) */
 .sidebar .menu {
+    position: relative;
     display: block;
     cursor: pointer;
     padding: 4px;
@@ -56,11 +57,12 @@
 }
 
 .sidebar .menu:hover {
-    background-color: rgba(226, 230, 235, 0.5);
+    background-color: rgba(210, 215, 220, 0.7);
 }
 
 /* New Chat button (Plus icon) */
 .sidebar .new-chat {
+    position: relative;
     display: flex;
     margin-top: 20px;
     align-items: center;
@@ -77,7 +79,7 @@
 }
 
 .sidebar .new-chat:hover {
-    background-color: rgba(226, 230, 235, 0.5);
+    background-color: rgba(210, 215, 220, 0.7);
 }
 
 .sidebar .new-chat img {
@@ -122,7 +124,7 @@
 }
 
 .sidebar .recent-entry:hover {
-    background-color: rgba(226, 230, 235, 0.5);
+    background-color: rgba(210, 215, 220, 0.7);
 }
 
 /* Text labels in extended state */
@@ -142,4 +144,35 @@
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/* ===========================
+   TOOLTIP STYLES
+   =========================== */
+
+.sidebar .tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(-10px);
+    background-color: rgba(40, 40, 40, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    margin-top: 8px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar .menu:hover .tooltip,
+.sidebar .new-chat:hover .tooltip {
+    opacity: 1;
+    transform: translateY(0);
 }
