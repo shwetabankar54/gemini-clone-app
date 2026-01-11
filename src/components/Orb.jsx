@@ -2,6 +2,11 @@ import { Mesh, Program, Renderer, Triangle, Vec3 } from 'ogl';
 import { useEffect, useRef } from 'react';
 import './Orb.css';
 
+const HOVER_LERP_FACTOR = 0.1;
+const ROTATION_SPEED = 0.3;
+const HOVER_THRESHOLD = 0.5;
+const ORB_RADIUS = 0.8;
+
 export default function Orb({
   hue = 0,
   hoverIntensity = 0.2,
@@ -10,7 +15,7 @@ export default function Orb({
   backgroundColor = '#000000',
   opacity = 1.0
 }) {
-  const ctnDom = useRef(null);
+  const containerRef = useRef(null);
 
   const vert = /* glsl */ `
     precision highp float;
@@ -185,9 +190,10 @@ export default function Orb({
   `;
 
   useEffect(() => {
-    const container = ctnDom.current;
+    const container = containerRef.current;
     if (!container) return;
 
+    let mounted = true;
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
@@ -228,7 +234,6 @@ export default function Orb({
     let targetHover = 0;
     let lastTime = 0;
     let currentRot = 0;
-    const rotationSpeed = 0.3;
 
     const handleMouseMove = e => {
       const rect = container.getBoundingClientRect();
@@ -242,7 +247,7 @@ export default function Orb({
       const uvX = ((x - centerX) / size) * 2.0;
       const uvY = ((y - centerY) / size) * 2.0;
 
-      if (Math.sqrt(uvX * uvX + uvY * uvY) < 0.8) {
+      if (Math.sqrt(uvX * uvX + uvY * uvY) < ORB_RADIUS) {
         targetHover = 1;
       } else {
         targetHover = 0;
@@ -258,6 +263,7 @@ export default function Orb({
 
     let rafId;
     const update = t => {
+      if (!mounted) return;
       rafId = requestAnimationFrame(update);
       const dt = (t - lastTime) * 0.001;
       lastTime = t;
@@ -267,10 +273,10 @@ export default function Orb({
       program.uniforms.backgroundColor.value = hexToVec3(backgroundColor);
 
       const effectiveHover = forceHoverState ? 1 : targetHover;
-      program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
+      program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * HOVER_LERP_FACTOR;
 
-      if (rotateOnHover && effectiveHover > 0.5) {
-        currentRot += dt * rotationSpeed;
+      if (rotateOnHover && effectiveHover > HOVER_THRESHOLD) {
+        currentRot += dt * ROTATION_SPEED;
       }
       program.uniforms.rot.value = currentRot;
 
@@ -279,17 +285,20 @@ export default function Orb({
     rafId = requestAnimationFrame(update);
 
     return () => {
+      mounted = false;
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
-      container.removeChild(gl.canvas);
+      if (container.contains(gl.canvas)) {
+        container.removeChild(gl.canvas);
+      }
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hue, hoverIntensity, rotateOnHover, forceHoverState, backgroundColor, opacity]);
+  }, [hue, hoverIntensity, rotateOnHover, forceHoverState, backgroundColor]);
 
-  return <div ref={ctnDom} className="orb-container" style={{ opacity }} />;
+  return <div ref={containerRef} className="orb-container" style={{ opacity }} />;
 }
 
 function hslToRgb(h, s, l) {

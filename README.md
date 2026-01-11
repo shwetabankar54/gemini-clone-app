@@ -1,103 +1,102 @@
 # Gemini Clone App
 
-A React-based clone of Google's Gemini AI interface with real-time AI responses powered by the Google Gemini API.
+> **This is how we think Gemini should look.** A fresh take on Google's AI interface — replacing the traditional flat design with immersive glassmorphism and a living, breathing WebGL orb that responds to your interactions.
 
-## ✨ Features
+## Features
 
-- Interactive chat interface with Google Gemini AI
-- Real-time AI responses with typing animation
-- Suggestion cards for quick prompts
-- Clean and modern UI matching Google's Gemini design
-- Sidebar navigation with chat history
-- Error handling for API failures
-- Responsive design
+### Chat
+- Real-time AI responses powered by Gemini 2.5 Flash
+- Markdown rendering with code syntax highlighting
+- Edit and resend previous prompts
+- Copy prompts to clipboard
+- Speech-to-text input via microphone
 
-## 🛠️ Tech Stack
+### UI/UX
+- Glassmorphism design with blur effects
+- Animated WebGL orb background (powered by OGL)
+- Smooth transitions and loading animations
+- Collapsible sidebar navigation
+- Toast notifications
 
-- **React 19** - UI library
-- **Vite** - Build tool and development server
-- **Google Generative AI SDK** - Gemini API integration
-- **CSS** - Styling
+### Data
+- Chat history persisted in localStorage
+- Delete individual chats with animation
+- Auto-generated chat titles via AI
 
-## 📦 Installation
+### Security
+- XSS protection via DOMPurify sanitization
+- Secure API key handling via environment variables
 
-1. Clone the repository:
+### Shortcuts
+- `Ctrl+Shift+O` - New chat
+
+## Tech Stack
+
+| Package | Purpose |
+|---------|---------|
+| React 19 | UI framework |
+| Vite 7 | Build tool |
+| @google/generative-ai | Gemini API |
+| OGL | WebGL orb animation |
+| Marked | Markdown parsing |
+| DOMPurify | HTML sanitization |
+
+## Installation
+
 ```bash
 git clone https://github.com/shwetabankar54/gemini-clone-app.git
-cd Gemini_Clone_App
-```
-
-2. Install dependencies:
-```bash
+cd gemini-clone-app
 npm install
 ```
 
-3. Set up your Google Gemini API key:
-   - Get your API key from [Google AI Studio](https://aistudio.google.com/apikey)
-   - Create a `.env` file in the root directory
-   - Add your API key:
-   ```
-   VITE_GOOGLE_API_KEY=your_api_key_here
-   ```
+Create `.env` file:
+```
+VITE_GOOGLE_API_KEY=your_api_key_here
+```
 
-4. Run the development server:
+Get your API key from [Google AI Studio](https://aistudio.google.com/apikey)
+
 ```bash
 npm run dev
 ```
 
-5. Open your browser and navigate to `http://localhost:5173`
+Open `http://localhost:5173`
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-Gemini_Clone_App/
-├── src/
-│   ├── components/
-│   │   ├── Main.jsx          # Main chat interface
-│   │   ├── Main.css
-│   │   ├── Sidebar.jsx       # Navigation sidebar
-│   │   └── Sidebar.css
-│   ├── config/
-│   │   └── gemini.js         # Gemini API configuration
-│   ├── context/
-│   │   └── Context.jsx       # Global state management
-│   ├── assets/
-│   │   └── assets.js         # App icons and images
-│   ├── App.jsx
-│   ├── App.css
-│   ├── index.css
-│   └── main.jsx
-├── .env                      # Environment variables (API key)
-├── index.html
-├── package.json
-└── vite.config.js
+src/
+├── components/
+│   ├── Main.jsx        # Chat interface, message bubbles, input
+│   ├── Sidebar.jsx     # Navigation, chat history, delete
+│   └── Orb.jsx         # WebGL shader animation
+├── config/
+│   └── gemini.js       # API setup, title generation
+├── context/
+│   └── Context.jsx     # Global state, chat logic
+└── assets/             # SVG icons
 ```
 
-## 🔧 Configuration
+## Configuration
 
-The app uses the **Gemini 2.5 Flash** model for fast and efficient responses. You can modify the model in `src/config/gemini.js`:
+Model can be changed in `src/config/gemini.js`:
 
 ```javascript
 const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
+    model: "gemini-2.5-flash",  // Fast responses
+    // model: "gemini-2.5-pro", // More capable
 });
 ```
 
-Available models:
-- `gemini-2.5-flash` - Fast responses (recommended)
-- `gemini-2.5-pro` - More capable, slower responses
-- `gemini-3-flash-preview` - Latest preview version
+## Scripts
 
-## 📝 Available Scripts
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview build |
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
+## Authors
 
-## 👩‍💻 Author
-
-**Shweta Bankar**
-
-## 📄 License
-
-This project is for educational purposes.
+- **Krishna Sonji**
+- **Shweta Bankar**
